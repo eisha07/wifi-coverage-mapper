@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Report and map campus WiFi dead zones, slow spots and connection drops so IT can fix the worst areas first.">
+  <title>SignalMap · Campus WiFi Coverage Issue Mapper</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" id="top">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-name">SignalMap</span>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="#map">Map</a></li>
+          <li><a href="#report">Report</a></li>
+          <li><a href="#issues">Issues</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Campus WiFi Coverage Issue Mapper</p>
+          <h1 id="hero-title">Find the dead zones. Fix the WiFi.</h1>
+          <p class="lead">Students and staff log weak, slow or failing WiFi spots in under a minute. Reports are scored, grouped by building and shown on a heat map so the IT team knows where to start.</p>
+          <p class="hero-actions">
+            <a class="btn btn-primary" href="#report">Report a problem</a>
+            <a class="btn btn-ghost" href="#map">View the map</a>
+          </p>
+        </div>
+        <dl class="stats" id="stats" aria-label="Live summary"></dl>
+      </div>
+    </section>
+
+    <section id="map" class="section" aria-labelledby="map-title">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="map-title">Campus coverage map</h2>
+          <p>Each tile is a building, coloured by its worst open issue. Select a tile to filter the issue list.</p>
+        </header>
+        <div class="map-layout">
+          <div class="campus-map" id="campus-map" role="group" aria-label="Campus buildings"></div>
+          <aside class="legend card" aria-labelledby="legend-title">
+            <h3 id="legend-title">Legend</h3>
+            <ul class="legend-list">
+              <li><span class="swatch heat-0" aria-hidden="true"></span>No open issues</li>
+              <li><span class="swatch heat-1" aria-hidden="true"></span>Low</li>
+              <li><span class="swatch heat-2" aria-hidden="true"></span>Medium</li>
+              <li><span class="swatch heat-3" aria-hidden="true"></span>High</li>
+              <li><span class="swatch heat-4" aria-hidden="true"></span>Critical</li>
+            </ul>
+            <p class="map-status" id="map-status" aria-live="polite">Showing all buildings.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="report" class="section section-alt" aria-labelledby="report-title">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="report-title">Report a WiFi problem</h2>
+          <p>All fields are required unless marked optional.</p>
+        </header>
+
+        <div class="report-layout">
+          <form id="report-form" class="card report-form">
+            <fieldset>
+              <legend>Location</legend>
+              <div class="field-grid">
+                <div class="field">
+                  <label for="building">Building</label>
+                  <select id="building" name="building" required>
+                    <option value="">Choose a building</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="floor">Floor</label>
+                  <input id="floor" name="floor" type="number" inputmode="numeric" min="-1" max="6" step="1" value="0" required aria-describedby="floor-hint">
+                  <small id="floor-hint" class="hint">0 is ground floor, −1 is basement.</small>
+                </div>
+                <div class="field field-wide">
+                  <label for="spot">Room or spot</label>
+                  <input id="spot" name="spot" type="text" minlength="2" maxlength="40" autocomplete="off" placeholder="e.g. Lab 3, near the stairs" required>
+                </div>
+              </div>
+              <div class="alert" id="duplicate-alert" role="status" hidden>
+                <p id="duplicate-text"></p>
+                <button type="button" class="btn btn-small btn-primary" id="confirm-duplicate">Add my confirmation instead</button>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Problem</legend>
+              <fieldset class="choice-group">
+                <legend>Issue type</legend>
+                <div class="chips">
+                  <label class="chip"><input type="radio" name="type" value="no-signal" required> No signal</label>
+                  <label class="chip"><input type="radio" name="type" value="drops"> Keeps disconnecting</label>
+                  <label class="chip"><input type="radio" name="type" value="slow"> Very slow</label>
+                  <label class="chip"><input type="radio" name="type" value="login"> Login portal fails</label>
+                </div>
+              </fieldset>
+              <div class="field-grid">
+                <div class="field">
+                  <label for="bars">Signal bars shown</label>
+                  <input id="bars" name="bars" type="range" min="0" max="4" step="1" value="2" aria-describedby="bars-output">
+                  <output id="bars-output" for="bars" class="hint">2 of 4 bars</output>
+                </div>
+                <div class="field">
+                  <label for="speed">Download speed (Mbps)</label>
+                  <input id="speed" name="speed" type="number" inputmode="decimal" min="0" max="1000" step="0.1" placeholder="e.g. 3.5" required aria-describedby="speed-hint">
+                  <small id="speed-hint" class="hint">Use any speed test. Enter 0 if nothing loads.</small>
+                </div>
+                <div class="field">
+                  <label for="observed">When did it happen?</label>
+                  <input id="observed" name="observed" type="datetime-local" required>
+                </div>
+                <div class="field">
+                  <label for="device">Device</label>
+                  <select id="device" name="device" required>
+                    <option value="">Choose a device</option>
+                    <option value="laptop">Laptop</option>
+                    <option value="phone">Phone</option>
+                    <option value="tablet">Tablet</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Details</legend>
+              <div class="field-grid">
+                <div class="field field-wide">
+                  <label for="note">What did you notice? <span class="optional">(optional)</span></label>
+                  <textarea id="note" name="note" rows="3" maxlength="280" aria-describedby="note-count"></textarea>
+                  <small id="note-count" class="hint">0 / 280 characters</small>
+                </div>
+                <div class="field field-wide">
+                  <label for="reporter">University email</label>
+                  <input id="reporter" name="reporter" type="email" autocomplete="email" placeholder="name@seecs.edu.pk" pattern="[\w.%+\-]+@(?:[\w\-]+\.)*(?:nust|seecs)\.edu\.pk" title="Use your NUST email, e.g. name@seecs.edu.pk or name@nust.edu.pk" required>
+                </div>
+              </div>
+            </fieldset>
+
+            <p class="severity-line">Estimated severity: <output id="severity-preview" class="badge" for="bars speed">Pick an issue type and speed</output></p>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Submit report</button>
+              <button type="reset" class="btn btn-ghost">Clear form</button>
+            </div>
+            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          </form>
+
+          <aside class="card info-card" aria-labelledby="score-title">
+            <h3 id="score-title">How severity is scored</h3>
+            <p>Each report gets a score from 0 to 100, calculated in your browser.</p>
+            <ul class="score-list">
+              <li><strong>Issue type</strong> No signal 50, disconnects 35, slow 25, login 20</li>
+              <li><strong>Weak signal</strong> +10 for every missing bar</li>
+              <li><strong>Low speed</strong> +20 under 1 Mbps, +12 under 5, +5 under 15</li>
+              <li><strong>Crowd</strong> +5 per confirmation, up to +20</li>
+            </ul>
+            <p class="hint">70+ critical · 45+ high · 25+ medium · below 25 low</p>
+            <h3>Duplicate check</h3>
+            <p>If an open report for the same building, floor and spot exists from the last 48 hours, you'll be asked to confirm it instead of filing a new one.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="issues" class="section" aria-labelledby="issues-title">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="issues-title">Reported issues</h2>
+          <p>Search, filter and sort reports. Confirm ones you've experienced or mark fixed ones as resolved.</p>
+        </header>
+
+        <div class="issues-layout">
+          <form id="filter-form" class="card filters" role="search" aria-label="Filter issues">
+            <div class="field">
+              <label for="search">Search</label>
+              <input id="search" name="query" type="search" maxlength="60" placeholder="Room, building or note">
+            </div>
+            <div class="field">
+              <label for="filter-building">Building</label>
+              <select id="filter-building" name="building">
+                <option value="all">All buildings</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="filter-type">Issue type</label>
+              <select id="filter-type" name="type">
+                <option value="all">All types</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="filter-status">Status</label>
+              <select id="filter-status" name="status">
+                <option value="open">Open</option>
+                <option value="resolved">Resolved</option>
+                <option value="all">All</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sort">Sort by</label>
+              <select id="sort" name="sort">
+                <option value="severity">Highest severity</option>
+                <option value="newest">Newest first</option>
+                <option value="confirms">Most confirmed</option>
+                <option value="speed">Slowest speed</option>
+              </select>
+            </div>
+            <div class="filter-actions">
+              <button type="reset" class="btn btn-ghost btn-small">Clear filters</button>
+            </div>
+            <div class="data-actions">
+              <button type="button" class="btn btn-ghost btn-small" id="reset-data">Restore sample data</button>
+              <button type="button" class="btn btn-danger btn-small" id="clear-data">Delete all reports</button>
+            </div>
+          </form>
+
+          <div class="results">
+            <p class="result-count" id="result-count" aria-live="polite"></p>
+            <ul class="issue-list" id="issue-list"></ul>
+            <div class="empty-state card" id="empty-state" hidden>
+              <h3 id="empty-title">Nothing to show</h3>
+              <p id="empty-text"></p>
+              <button type="button" class="btn btn-primary btn-small" id="empty-action"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section section-alt" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div>
+          <h2 id="about-title">About this project</h2>
+          <p><strong>User:</strong> students and staff on campus who hit WiFi problems, and the IT support team who decides where to send technicians.</p>
+          <p><strong>Problem:</strong> complaints about WiFi arrive scattered over WhatsApp groups and emails, with no location, no speed data and lots of duplicates, so the worst dead zones are hard to spot.</p>
+        </div>
+        <article class="card">
+          <h3>Runs in the browser</h3>
+          <ul>
+            <li>Form validation and the duplicate check</li>
+            <li>Severity scoring and live preview</li>
+            <li>Filtering, search, sorting and the heat map</li>
+            <li>Saving reports with <code>localStorage</code></li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Would move to a server later</h3>
+          <ul>
+            <li>Shared database of reports for everyone</li>
+            <li>Sign-in with university accounts</li>
+            <li>IT-only permission to resolve issues</li>
+            <li>Email alerts when a zone turns critical</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>SignalMap · CS-344 Web Engineering project · Built with HTML, CSS and vanilla JavaScript. Sample data is fictional.</p>
+    </div>
+  </footer>
+
+  <template id="issue-template">
+    <li class="issue">
+      <article class="issue-card">
+        <header class="issue-head">
+          <h3 class="issue-title"></h3>
+          <span class="badge"></span>
+        </header>
+        <p class="issue-sub"></p>
+        <dl class="issue-meta">
+          <div><dt>Signal</dt><dd class="meta-bars"></dd></div>
+          <div><dt>Speed</dt><dd class="meta-speed"></dd></div>
+          <div><dt>Seen</dt><dd><time class="meta-time"></time></dd></div>
+          <div><dt>Device</dt><dd class="meta-device"></dd></div>
+        </dl>
+        <p class="issue-note"></p>
+        <footer class="issue-actions">
+          <button type="button" class="btn btn-small btn-primary" data-action="confirm"></button>
+          <button type="button" class="btn btn-small btn-ghost" data-action="toggle"></button>
+        </footer>
+      </article>
+    </li>
+  </template>
+</body>
+</html>

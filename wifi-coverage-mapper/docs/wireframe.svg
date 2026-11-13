@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" font-family="system-ui, Arial, sans-serif" font-size="13">
+  <rect width="1200" height="760" fill="#f4f6fb"/>
+  <text x="40" y="40" font-size="20" font-weight="700" fill="#0f1b2d">SignalMap wireframes: mobile, tablet, desktop</text>
+
+  <g transform="translate(40 70)">
+    <text x="0" y="0" font-weight="700" fill="#0a6f6b">Mobile (&lt; 600px)</text>
+    <rect x="0" y="12" width="200" height="660" rx="18" fill="#fff" stroke="#0f1b2d" stroke-width="2"/>
+    <rect x="12" y="28" width="176" height="28" fill="#eaf0f8"/><text x="20" y="47">Logo · nav links</text>
+    <rect x="12" y="64" width="176" height="70" fill="#eaf0f8"/><text x="20" y="84">Hero + CTA</text>
+    <rect x="20" y="96" width="76" height="30" fill="#fff" stroke="#999"/><rect x="104" y="96" width="76" height="30" fill="#fff" stroke="#999"/>
+    <text x="12" y="156" font-weight="600">Map (2 columns)</text>
+    <g fill="#ffd8b0" stroke="#999">
+      <rect x="12" y="164" width="84" height="40"/><rect x="104" y="164" width="84" height="40"/>
+      <rect x="12" y="210" width="84" height="40"/><rect x="104" y="210" width="84" height="40"/>
+      <rect x="12" y="256" width="176" height="40"/>
+    </g>
+    <text x="12" y="320" font-weight="600">Report form (1 column)</text>
+    <g fill="#fff" stroke="#999">
+      <rect x="12" y="328" width="176" height="24"/><rect x="12" y="358" width="176" height="24"/>
+      <rect x="12" y="388" width="176" height="24"/><rect x="12" y="418" width="176" height="24"/>
+    </g>
+    <rect x="12" y="450" width="80" height="24" rx="12" fill="#0a6f6b"/><text x="24" y="467" fill="#fff">Submit</text>
+    <text x="12" y="500" font-weight="600">Filters stacked</text>
+    <rect x="12" y="508" width="176" height="40" fill="#eaf0f8" stroke="#999"/>
+    <text x="12" y="570" font-weight="600">Issue cards (1 column)</text>
+    <rect x="12" y="578" width="176" height="36" fill="#fff" stroke="#999"/>
+    <rect x="12" y="620" width="176" height="36" fill="#fff" stroke="#999"/>
+  </g>
+
+  <g transform="translate(290 70)">
+    <text x="0" y="0" font-weight="700" fill="#0a6f6b">Tablet (600–1023px)</text>
+    <rect x="0" y="12" width="360" height="660" rx="18" fill="#fff" stroke="#0f1b2d" stroke-width="2"/>
+    <rect x="14" y="28" width="332" height="28" fill="#eaf0f8"/><text x="22" y="47">Logo · Map · Report · Issues · About</text>
+    <rect x="14" y="64" width="332" height="46" fill="#eaf0f8"/><text x="22" y="84">Hero</text>
+    <g fill="#fff" stroke="#999"><rect x="14" y="116" width="77" height="30"/><rect x="99" y="116" width="77" height="30"/><rect x="184" y="116" width="77" height="30"/><rect x="269" y="116" width="77" height="30"/></g>
+    <text x="14" y="168" font-weight="600">Map (3 columns) + legend below</text>
+    <g fill="#ffc7c4" stroke="#999">
+      <rect x="14" y="176" width="104" height="44"/><rect x="124" y="176" width="222" height="44"/>
+      <rect x="14" y="226" width="104" height="44"/><rect x="124" y="226" width="222" height="44"/>
+      <rect x="14" y="276" width="104" height="44"/><rect x="124" y="276" width="104" height="44"/><rect x="234" y="276" width="112" height="44"/>
+    </g>
+    <text x="14" y="346" font-weight="600">Form (2-column field grid)</text>
+    <g fill="#fff" stroke="#999">
+      <rect x="14" y="354" width="160" height="24"/><rect x="186" y="354" width="160" height="24"/>
+      <rect x="14" y="384" width="332" height="24"/>
+      <rect x="14" y="414" width="160" height="24"/><rect x="186" y="414" width="160" height="24"/>
+    </g>
+    <text x="14" y="466" font-weight="600">Filters (2 columns)</text>
+    <rect x="14" y="474" width="332" height="44" fill="#eaf0f8" stroke="#999"/>
+    <text x="14" y="540" font-weight="600">Issue cards (2 columns)</text>
+    <g fill="#fff" stroke="#999"><rect x="14" y="548" width="160" height="50"/><rect x="186" y="548" width="160" height="50"/><rect x="14" y="604" width="160" height="50"/><rect x="186" y="604" width="160" height="50"/></g>
+  </g>
+
+  <g transform="translate(680 70)">
+    <text x="0" y="0" font-weight="700" fill="#0a6f6b">Desktop (≥ 1024px)</text>
+    <rect x="0" y="12" width="480" height="660" rx="12" fill="#fff" stroke="#0f1b2d" stroke-width="2"/>
+    <rect x="14" y="28" width="452" height="28" fill="#eaf0f8"/><text x="22" y="47">Sticky header: logo · nav</text>
+    <rect x="14" y="64" width="270" height="80" fill="#eaf0f8"/><text x="22" y="84">Hero text + CTAs</text>
+    <g fill="#fff" stroke="#999"><rect x="294" y="64" width="82" height="36"/><rect x="384" y="64" width="82" height="36"/><rect x="294" y="108" width="82" height="36"/><rect x="384" y="108" width="82" height="36"/></g>
+    <text x="14" y="168" font-weight="600">Map (4 columns) + legend sidebar</text>
+    <g fill="#fff0bf" stroke="#999">
+      <rect x="14" y="176" width="78" height="44"/><rect x="98" y="176" width="162" height="44"/><rect x="266" y="176" width="78" height="44"/>
+      <rect x="14" y="226" width="162" height="44"/><rect x="182" y="226" width="78" height="44"/><rect x="266" y="226" width="78" height="44"/>
+      <rect x="14" y="276" width="78" height="44"/><rect x="98" y="276" width="162" height="44"/><rect x="266" y="276" width="78" height="44"/>
+    </g>
+    <rect x="354" y="176" width="112" height="144" fill="#eaf0f8" stroke="#999"/><text x="364" y="196">Legend</text>
+    <text x="14" y="346" font-weight="600">Form + sticky "How scoring works" aside</text>
+    <rect x="14" y="354" width="320" height="130" fill="#fff" stroke="#999"/><text x="24" y="374">Location · Problem · Details</text>
+    <rect x="344" y="354" width="122" height="130" fill="#eaf0f8" stroke="#999"/><text x="352" y="374">Scoring rules</text>
+    <text x="14" y="510" font-weight="600">Sticky filter sidebar + 3-column cards</text>
+    <rect x="14" y="518" width="110" height="140" fill="#eaf0f8" stroke="#999"/><text x="22" y="538">Filters</text>
+    <g fill="#fff" stroke="#999">
+      <rect x="134" y="518" width="104" height="66"/><rect x="248" y="518" width="104" height="66"/><rect x="362" y="518" width="104" height="66"/>
+      <rect x="134" y="592" width="104" height="66"/><rect x="248" y="592" width="104" height="66"/><rect x="362" y="592" width="104" height="66"/>
+    </g>
+  </g>
+</svg>
