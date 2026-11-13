@@ -193,7 +193,7 @@ MOBILE                 TABLET                          DESKTOP
 | **6. Deployment** | Static hosting on GitHub Pages. |
 | **7. Maintenance** | Next step is a backend (see below) so reports are shared between users. |
 
-### Current vs Future Features
+### What runs where
 
 | Runs in the browser (now) | Would run on a server (later) |
 |---|---|
@@ -296,12 +296,12 @@ A suggested 3–4 minute demo:
 
 ---
 
-## Attribution
+## 🙏 Attribution
 
 - All 10 sample records are fictional and were written for this project. Building names refer to the NUST H-12 campus layout only loosely.
 - No third-party code, libraries, templates, fonts or icons. Fonts use the system font stack, and the signal-bar icons are pure CSS.
 - References: [MDN Web Docs](https://developer.mozilla.org/) for constraint validation, `:has()`, `:user-invalid` and `<template>`.
-- AI assistance: `used claude to correct code`
+- AI assistance: `<state honestly what tools you used and for what, per the course policy>`
 
 ---
 
